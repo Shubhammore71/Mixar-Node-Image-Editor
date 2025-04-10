@@ -24,13 +24,8 @@ NodeEditor::~NodeEditor() {
 void NodeEditor::draw() {
     ImNodes::BeginNodeEditor();
 
-    int hoveredLinkId = -1;
-    if (ImNodes::IsLinkHovered(&hoveredLinkId)) {
-        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
-            // Delete the connection with this ID
-            deleteConnection(hoveredLinkId);
-        }
-    }
+
+   
 
     for (auto& node : nodes) {
         ImNodes::BeginNode(node->id);
@@ -69,6 +64,14 @@ void NodeEditor::draw() {
 }
 
     ImNodes::EndNodeEditor();
+     // Check for double-click on links
+    int hoveredLinkId = -1;
+    if (ImNodes::IsLinkHovered(&hoveredLinkId)) {
+        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+            // Delete the connection with this ID
+            deleteConnection(hoveredLinkId);
+        }
+    }
     handleConnections();
 }
 
@@ -92,6 +95,7 @@ void NodeEditor::deleteConnection(int linkId) {
         connections.erase(it);
     }
 }
+
 
 
 
