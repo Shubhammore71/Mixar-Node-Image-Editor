@@ -1,0 +1,5 @@
+/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles/imgui.dir
+/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles/imnodes.dir
+/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles/NodeImageEditor.dir
+/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles/edit_cache.dir
+/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles/rebuild_cache.dir

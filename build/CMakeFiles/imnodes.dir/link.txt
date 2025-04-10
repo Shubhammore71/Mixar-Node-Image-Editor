@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libimnodes.a CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o
+/usr/bin/ranlib lib/libimnodes.a
