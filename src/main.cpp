@@ -50,6 +50,12 @@ int main() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImNodes::CreateContext();
+    ImNodesStyle& style = ImNodes::GetStyle();
+style.NodePadding = ImVec2(8, 4);  // Reduced from default (8,8)
+style.GridSpacing = 8.0f;   
+ImGuiStyle& imguiStyle = ImGui::GetStyle();
+imguiStyle.ItemSpacing = ImVec2(4, 2);  // Reduced from (8,4)
+imguiStyle.FramePadding = ImVec2(4, 2); // Reduced from (8,4)
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
 

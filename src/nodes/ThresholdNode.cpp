@@ -15,22 +15,33 @@ int ThresholdNode::getPinType(int pinId) const {
 }
 
 
+// ThresholdNode.cpp
 void ThresholdNode::calculateHistogram() {
-    if(inputs[0].data.empty()) return;
-    
+    if (inputs.empty() || inputs[0].data.empty()) return;
+
+    // Convert to grayscale if needed
     cv::Mat gray;
-    cv::cvtColor(inputs[0].data, gray, cv::COLOR_BGR2GRAY);
-    
-    int histSize = 256;
-    float range[] = {0, 256};
+    if (inputs[0].data.channels() == 3) {
+        cv::cvtColor(inputs[0].data, gray, cv::COLOR_BGR2GRAY);
+    } else {
+        gray = inputs[0].data.clone();
+    }
+
+    // Calculate histogram
+    const int histSize = 256;
+    const float range[] = {0, 256};
     const float* histRange = {range};
-    cv::calcHist(&gray, 1, 0, cv::Mat(), gray, 1, &histSize, &histRange);
     
+    cv::Mat hist;
+    cv::calcHist(&gray, 1, 0, cv::Mat(), hist, 1, &histSize, &histRange);
+
+    // Store in member variable
     histogram.resize(histSize);
-    for(int i = 0; i < histSize; ++i) {
-        histogram[i] = gray.at<float>(i);
+    for (int i = 0; i < histSize; i++) {
+        histogram[i] = hist.at<float>(i);
     }
 }
+
 
 void ThresholdNode::process() {
     if(inputs[0].data.empty()) return;
@@ -57,19 +68,12 @@ void ThresholdNode::process() {
 }
 
 void ThresholdNode::drawUI() {
-    if(method == 0) {
-        ImGui::SliderFloat("Threshold", &thresholdValue, 0.0f, 255.0f);
-    }
-    
-    const char* methods[] = {"Binary", "Adaptive", "Otsu"};
+    const char* methods[] = {"Binary", "Binary Inv", "Trunc", "To Zero", "To Zero Inv"};
     ImGui::Combo("Method", &method, methods, IM_ARRAYSIZE(methods));
     
-   
+    ImGui::SliderFloat("Value", &thresholdValue, 0.0f, 255.0f);
     
-    if(ImGui::CollapsingHeader("Histogram")) {
-        calculateHistogram();
-        ImGui::PlotHistogram("##hist", histogram.data(), 
-                           histogram.size(), 0, NULL, 0.0f, 255.0f, 
-                           ImVec2(200, 80));
-    }
+    const char* types[] = {"8UC1", "32FC1"};
+    ImGui::Combo("Type", &outputType, types, IM_ARRAYSIZE(types)); // Now valid
 }
+

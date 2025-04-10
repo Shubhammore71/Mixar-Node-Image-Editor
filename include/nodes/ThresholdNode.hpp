@@ -1,18 +1,21 @@
 // ThresholdNode.hpp
 #pragma once
 #include "BaseNode.hpp"
+#include <vector>  // Add this
 
 class ThresholdNode : public BaseNode {
 public:
- int getPinType(int pinId) const override; 
     ThresholdNode();
     void process() override;
     void drawUI() override;
-    
+    int getPinType(int pinId) const override;
+
 private:
-    float thresholdValue = 128.0f;
-    int method = 0;
-    std::vector<float> histogram;
+    // Add these declarations
+    void calculateHistogram();  // Method declaration
+    std::vector<float> histogram;  // Member variable
     
-    void calculateHistogram();
+    int method = 0;
+    float thresholdValue = 128.0f;
+    int outputType = 0;
 };
