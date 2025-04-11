@@ -1,6 +1,6 @@
 
 
-```markdown
+
 # Node-Based Image Processor
 
 ![Screenshot](screenshot.png)
