@@ -10,10 +10,22 @@ ThresholdNode::ThresholdNode() {
     method = 0;
 }
 
+/**
+ *  Returns the data type for a specific pin
+ * The ID of the pin to check
+ *  Integer representing the pin type (0 = image type)
+ */
+
 int ThresholdNode::getPinType(int pinId) const {
     return 0; // Image type
 }
-
+/**
+ *  Calculates the histogram of the input image
+ * 
+ * This method computes a 256-bin histogram of pixel intensities
+ * from the input grayscale image. If the input is a color image,
+ * it's converted to grayscale first.
+ */
 
 // ThresholdNode.cpp
 void ThresholdNode::calculateHistogram() {
@@ -43,9 +55,18 @@ void ThresholdNode::calculateHistogram() {
 }
 
 
+/**
+ *Processes the input image with the selected thresholding method
+ * 
+ * Applies one of several thresholding algorithms to the input image:
+ * - Simple binary thresholding with a fixed value
+ * - Adaptive thresholding that adjusts to local image regions
+ * - Otsu's method for automatic threshold determination
+ */
+
 void ThresholdNode::process() {
     if(inputs[0].data.empty()) return;
-    
+    // Convert to grayscale if needed (thresholding requires grayscale input)
     cv::Mat gray;
     if (inputs[0].data.channels() == 3) {
         cv::cvtColor(inputs[0].data, gray, cv::COLOR_BGR2GRAY);
