@@ -210,7 +210,7 @@ void NodeEditor::processGraph() {
     }
 }
 
-
+//toposort logic
 void NodeEditor::processNode(BaseNode* node, std::unordered_set<BaseNode*>& processed) {
     if (processed.count(node) > 0) {
         return; // Skip if already processed
