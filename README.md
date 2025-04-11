@@ -1,8 +1,4 @@
-Here's a full updated `README.md` for your GitHub repository [`node-based-image-processor`](https://github.com/Shubhammore71/node-based-image-processor), incorporating detailed information about the project, node types (basic, intermediate, advanced), features, installation, memory management, contribution guidelines, and a consistent naming convention:
 
----
-
-```markdown
 # Node-Based Image Processor
 
 ![Screenshot](screenshot.png)
