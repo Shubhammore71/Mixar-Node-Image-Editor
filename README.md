@@ -14,7 +14,6 @@ The Node-Based Image Processor allows users to:
 - Process images in real-time with immediate visual feedback.
 - Export the final processed images in multiple formats.
 
-This application is ideal for developers, researchers, and enthusiasts who want to prototype or experiment with image processing techniques without writing code for each operation.
 
 ---
 
@@ -71,7 +70,7 @@ node-based-image-processor/
 │       ├── BlendNode.cpp
 │       ├── NoiseNode.cpp
 │       └── ConvolutionNode.cpp
-├── libs/                  # Third-party dependencies (PDF and others)
+├── libs/                  # Third-party dependencies (pfd and others)
 ├── imgui/                 # Dear ImGui library files for UI rendering
 ├── imnodes/               # ImNodes library files for node graph functionality
 ├── CMakeLists.txt         # Build configuration file for CMake
@@ -98,7 +97,7 @@ brew install opencv glfw glew
 
 ### **Build Process**
 ```bash  
-git clone https://github.com/yourusername/node-based-image-processor.git  
+git clone https://github.com/Shubhammore71/node-based-image-processor
 cd node-based-image-processor  
 mkdir build && cd build  
 cmake .. -DCMAKE_BUILD_TYPE=Release  
