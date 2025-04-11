@@ -286,5 +286,8 @@ classDiagram
 4. Debugging tools to visualize connections and processing order.
 5. Export functionality to save processed images.
 
+
+For detailed design documentation, see [DESIGN.md](DESIGN.md).
+
 ---
 
