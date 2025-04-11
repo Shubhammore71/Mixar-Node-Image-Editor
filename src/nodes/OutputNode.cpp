@@ -8,7 +8,6 @@ OutputNode::OutputNode() {
     inputs.emplace_back(Pin{0, "Image"});
 }
 int OutputNode::getPinType(int pinId) const {
-    // Input pin (image)
     return 0;
 }
 
