@@ -1,51 +1,57 @@
+Here's a full updated `README.md` for your GitHub repository [`node-based-image-processor`](https://github.com/Shubhammore71/node-based-image-processor), incorporating detailed information about the project, node types (basic, intermediate, advanced), features, installation, memory management, contribution guidelines, and a consistent naming convention:
 
+---
 
-
+```markdown
 # Node-Based Image Processor
 
 ![Screenshot](screenshot.png)
 
-An open-source, extensible **node-based image processing editor** built using **C++**, **OpenCV**, and **Dear ImGui**. This tool enables visual creation of complex image manipulation pipelines—ideal for developers, artists, and researchers working with image data.
+An open-source **node-based image processing editor** built with **C++**, **OpenCV**, and **Dear ImGui**. This project enables users to build complex image processing pipelines using a visual, interactive editor. Designed with real-time feedback, flexibility, and extensibility in mind.
 
 ---
 
-## 🚀 Key Features
-- Drag-and-drop **node-based UI** for image operations
-- **Real-time, non-destructive processing** powered by OpenCV
-- Modular system with **basic to advanced node types**
-- Built-in **preview, debugging, and memory tracking tools**
-- **Cross-platform** compatibility via OpenGL and GLFW
+## ✨ Key Features
+
+- 🧩 Node-based visual workflow
+- 🖼️ Real-time image preview and feedback
+- 🧠 Intelligent memory and resource management
+- 🔧 Multiple image operation nodes (filters, blending, noise, thresholding)
+- 💻 Cross-platform (macOS/Linux/Windows with some adjustments)
 
 ---
 
-## 📋 Table of Contents
+## 📁 Table of Contents
+
 - [Installation](#installation)
 - [Usage](#usage)
-- [Node Reference](#node-reference)
+- [Features](#features)
+- [Node Documentation](#node-documentation)
   - [Basic Nodes](#basic-nodes)
   - [Intermediate Nodes](#intermediate-nodes)
   - [Advanced Nodes](#advanced-nodes)
-- [Features](#features)
 - [Memory Management](#memory-management)
 - [Contributing](#contributing)
 - [License](#license)
 
 ---
 
-## 🛠️ Installation
+## 🔧 Installation
 
-### ✅ Prerequisites
-- **macOS** (Ventura 13.4+ recommended)
-- **Xcode Command Line Tools**
-- **Homebrew** (for dependency management)
+### 🧱 Prerequisites
 
-### 🔧 Steps
+- macOS (tested on Ventura 13.4+)
+- Xcode Command Line Tools
+- Homebrew package manager
+
+### 🛠️ Build Steps
+
 ```bash
 # Install dependencies
 brew install opencv glfw glew
 
-# Clone this repository
-git clone https://github.com/yourusername/node-based-image-processor.git
+# Clone the repository
+git clone https://github.com/Shubhammore71/node-based-image-processor.git
 cd node-based-image-processor
 
 # Build the project
@@ -59,191 +65,182 @@ make -j4
 
 ---
 
-## 🧪 Usage
+## 🚀 Usage
 
 ### Basic Workflow
-1. **Add Nodes** via right-click or the Nodes menu
-2. **Connect** using visual links between node pins
-3. **Adjust Parameters** in real-time
-4. **Preview Output** instantly
-5. **Export** via Output node options
 
-### Keyboard Shortcuts
-- `Ctrl + N`: New Project
-- `Ctrl + S`: Save Project
-- `Del`: Delete Selected Node
-- `Double-click`: Delete Connections
+1. **Add Nodes** – Right-click > Add Node
+2. **Connect Nodes** – Drag from output pin to input pin
+3. **Adjust Parameters** – Use property panel
+4. **Live Preview** – Output updates in real-time
+5. **Export** – Right-click on Output Node > Save Image
 
----
+### ⌨️ Keyboard Shortcuts
 
-## 📦 Node Reference
-
-### 🟢 Basic Nodes
-
-#### 🖼️ Image Input Node
-- **Function**: Loads image from disk
-- **Parameters**:
-  - File path
-  - Color space (RGB / Grayscale)
-  - Show metadata: resolution, size, format
-- **Output**: `cv::Mat`
-
-#### 🖼️ Output Node
-- **Function**: Displays and saves final output
-- **Features**:
-  - Live preview
-  - Output format selection (PNG, JPEG, EXR)
-  - Quality/compression settings
-
-#### 🌗 Brightness/Contrast Node
-- **Controls**:
-  - Brightness: `-100%` to `+100%`
-  - Contrast: `0.1x` to `3.0x`
-- **UI**:
-  - Sliders with reset buttons
-  - Histogram visualization
-
-#### 🌈 Color Channel Splitter
-- **Function**: Splits image into RGB(A) channels
-- **Options**:
-  - Output grayscale per channel
-  - Visualize channel overlays
+- `Ctrl + N` – New Project
+- `Ctrl + S` – Save Project
+- `Del` – Delete Selected Node
+- `Double Click` – Remove Connections
 
 ---
 
-### 🟡 Intermediate Nodes
+## 🌟 Features
 
-#### 💧 Blur Node
-- **Function**: Gaussian blur filter
-- **Controls**:
-  - Radius: `1px` to `20px`
-  - Type: Uniform / Directional
-- **Extras**:
-  - Kernel preview display
+### 🧠 Core Architecture
 
-#### ⚫ Threshold Node
-- **Function**: Convert image to binary
-- **Modes**:
-  - Binary
-  - Adaptive
-  - Otsu
-- **Extras**:
-  - Histogram overlay for guidance
+- Modular and extendable node system
+- Multi-threaded processing
+- Node alignment, snapping, and scaling
+- Context-aware UI with Dear ImGui
 
-#### 🧠 Edge Detection Node
-- **Algorithms**:
-  - Sobel
-  - Canny
-- **Controls**:
-  - Kernel size
-  - Thresholds
-- **Extras**:
-  - Overlay edge on original image toggle
+### 📁 File Support
 
-#### 🌀 Blend Node
-- **Function**: Blend two images
-- **Modes**:
-  - Normal
-  - Multiply
-  - Screen
-  - Overlay
-  - Difference
-- **Controls**:
-  - Opacity/mix slider
-  - Channel masking
+- **Input**: JPG, PNG, BMP, TIFF
+- **Output**: PNG, JPEG, OpenEXR
+- **Projects**: `.nbip` custom format
 
 ---
 
-### 🔴 Advanced Nodes
+## 🧱 Node Documentation
 
-#### 🌪️ Noise Generation Node
-- **Function**: Generate procedural noise
-- **Types**:
-  - Perlin
-  - Simplex
-  - Worley
-- **Controls**:
-  - Scale, Octaves, Persistence
-  - Apply as displacement or color
+### 📦 Basic Nodes
 
-#### 🧮 Convolution Filter Node
-- **Function**: Apply custom kernels
-- **Options**:
-  - 3×3 or 5×5 matrix
-  - Presets: Sharpen, Emboss, Edge Enhance
-- **Features**:
-  - Live effect preview
-  - Editable matrix
+#### 1. **Image Input Node**
+- Load image from filesystem
+- Show metadata (resolution, file size, format)
+- Format support: JPG, PNG, BMP
+- Outputs: `cv::Mat`
+
+#### 2. **Output Node**
+- Export final image to disk
+- Preview area
+- Format selection: PNG, JPEG, etc.
+- Resolution & compression control
+
+#### 3. **Brightness/Contrast Node**
+- Brightness slider: -100 to +100
+- Contrast slider: 0.0 to 3.0
+- Reset buttons
+- Histogram visualization
+
+#### 4. **Color Channel Splitter**
+- Splits RGB/RGBA into channels
+- Outputs grayscale channels (R, G, B, A)
+- Option for individual channel processing
 
 ---
 
-## 🌟 Features Recap
+### ⚙️ Intermediate Nodes
 
-- Node snapping and alignment
-- Context-aware property panels
-- Multi-threaded pipeline processing
-- Custom `.nbip` project format
-- Debugging overlays and visual logging
-- Drag-and-drop resource linking
+#### 5. **Blur Node**
+- Gaussian blur with adjustable radius (1–20 px)
+- Directional blur toggle
+- Preview kernel for learning
+
+#### 6. **Threshold Node**
+- Convert to binary based on threshold value
+- Thresholding modes: Binary, Adaptive, Otsu
+- Histogram display for analysis
+
+#### 7. **Edge Detection Node**
+- Sobel and Canny algorithms
+- Adjustable kernel size & thresholds
+- Overlay edges on original image
+
+#### 8. **Blend Node**
+- Combine two image streams
+- Blend modes: Normal, Multiply, Screen, Overlay, Difference
+- Opacity slider
+
+---
+
+### 🧪 Advanced Nodes
+
+#### 9. **Noise Generation Node**
+- Procedural noise types: Perlin, Simplex, Worley
+- Customizable parameters (scale, octaves, persistence)
+- Use as displacement or color input
+
+#### 10. **Convolution Filter Node**
+- Custom 3x3 or 5x5 matrix kernel
+- Presets: Sharpen, Emboss, Edge Enhance
+- Real-time visual feedback
 
 ---
 
 ## 🧠 Memory Management
 
-### Techniques Used
-- **Smart Pointers**:
+### 🛡️ Key Strategies
+
+- **Smart Pointers** for all dynamic nodes
   ```cpp
-  std::vector<std::unique_ptr<Node>> nodes;
+  std::vector<std::shared_ptr<Node>> nodes;
   ```
-- **OpenCV Auto-Release**:
-  ```cpp
-  cv::Mat imageData; // Ref-counted
-  ```
-- **OpenGL Cleanup**:
+- **OpenCV `cv::Mat`** automatic ref-counting
+- **Manual OpenGL cleanup**
   ```cpp
   glDeleteTextures(1, &textureID);
   ```
-- **RAII & Cleanup Hooks**:
-  - Safe pin disconnection
-  - Cascading memory deallocation
-  - Thread-safe allocation logs
+- **Automatic disconnection & cleanup** on node removal
 
-### Leak Prevention
-- RAII across modules
-- Matrix bounds checking
-- `DEBUG_MEMORY=1` profiler mode
+### 🧪 Leak Prevention
+
+- RAII for all major objects
+- Thread-safe memory access
+- Matrix boundary validations
+- Debug Mode: `DEBUG_MEMORY=1`
 
 ---
 
 ## 🤝 Contributing
 
-### How to Contribute
-1. **Report Issues**: Use the GitHub issues template
-2. **Suggest Features**: Propose new nodes or UX ideas
-3. **Code**:
-   ```bash
-   git checkout -b feature/your-feature
-   cmake -DCMAKE_BUILD_TYPE=Debug ..
-   make && ctest
-   ```
+### 📌 How to Contribute
 
-### Priority Contributions
-- New filters (sharpen, distort, etc.)
-- GPU (OpenCL / CUDA) acceleration
-- Plugin SDK
-- Node graph serialization improvements
+1. **Report Bugs**  
+   Use GitHub Issues template. Include screenshots or test images.
+
+2. **Suggest Features**  
+   - New node types  
+   - UI improvements  
+   - Performance enhancements  
+
+3. **Code Contributions**
+```bash
+git checkout -b feature/your-feature-name
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+make && ./bin/NodeImageEditor
+```
+
+### 🚩 Priority Contributions
+
+- 🎨 More Image Filters
+- 🚀 GPU Acceleration (OpenCL/CUDA)
+- 🔌 Plugin Support
+- 🧾 Documentation Enhancements
 
 ---
 
 ## 📜 License
 
-**MIT License**
+MIT License © 2024 [Shubham More](https://github.com/Shubhammore71)
 
-© 2024 Shubham More
+> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files...
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software...
+(standard MIT license continues)
 
-(standard MIT license text continues)
+---
+
+## 📷 Screenshot
+
+![Node-Based Image Processor Screenshot](screenshot.png)
+
+---
+
+## 🌐 Repository
+
+**GitHub**: [https://github.com/Shubhammore71/node-based-image-processor](https://github.com/Shubhammore71/node-based-image-processor)
 ```
 
+---
 
+Let me know if you want me to generate badges (like license, build, platform), add a logo, or write GitHub issue templates or `CONTRIBUTING.md` as well.
