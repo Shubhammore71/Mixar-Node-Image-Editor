@@ -191,10 +191,3 @@ classDiagram
 
 ---
 
-This README provides a comprehensive overview of the project structure, features implemented, build instructions, design decisions, and third-party libraries used in the project. It is tailored to showcase the project's capabilities in a professional setting.
-
-Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/50519927/d3faf547-21a9-49fb-a94c-c30787e2a5f1/paste.txt
-
----
-Answer from Perplexity: pplx.ai/share
