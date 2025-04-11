@@ -61,50 +61,48 @@ for (size_t i = 0; i < connections.size(); i++) {
     ImNodes::EndNodeEditor();
 
 
-  int hoveredLinkId = -1;
-if (ImNodes::IsLinkHovered(&hoveredLinkId)) {
+
+
+int hoveredNodeId = -1;
+if (ImNodes::IsNodeHovered(&hoveredNodeId)) {
     if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
-        std::cout << "Double-clicked on link ID: " << hoveredLinkId << std::endl;
-        if (hoveredLinkId >= 0 && hoveredLinkId < static_cast<int>(connections.size())) {
-            deleteConnection(hoveredLinkId);
+        std::cout << "Double-clicked on node ID: " << hoveredNodeId << std::endl;
+
+        // Remove all connections associated with this node
+        connections.erase(
+            std::remove_if(connections.begin(), connections.end(),
+                [hoveredNodeId](const Connection& conn) {
+                    return conn.inputNode == hoveredNodeId || conn.outputNode == hoveredNodeId;
+                }),
+            connections.end());
+
+        // Remove the node itself
+        auto it = std::find_if(nodes.begin(), nodes.end(),
+            [hoveredNodeId](const std::unique_ptr<BaseNode>& node) {
+                return node->id == hoveredNodeId;
+            });
+
+        if (it != nodes.end()) {
+            nodes.erase(it);
+            processGraph();
         }
     }
 }
- if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
-        for (size_t i = 0; i < nodes.size(); i++) {
-            if (ImNodes::IsNodeHovered(&nodes[i]->id)) {
-                // Remove all connections to/from this node
-                connections.erase(
-                    std::remove_if(connections.begin(), connections.end(),
-                        [nodeId = nodes[i]->id](const Connection& conn) {
-                            return conn.inputNode == nodeId || conn.outputNode == nodeId;
-                        }),
-                    connections.end());
-                
-                // Remove the node
-                nodes.erase(nodes.begin() + i);
-                processGraph();
-                break;
-            }
-        }
-    }
+
     handleConnections();
 }
 void NodeEditor::deleteConnection(int connectionIndex) {
     if (connectionIndex < 0 || connectionIndex >= static_cast<int>(connections.size())) {
         return;
     }
-    
-    std::cout << "Deleting connection at index: " << connectionIndex << std::endl;
-    
-    // Get connection to delete
+
+    // Get the connection to delete
     Connection& conn = connections[connectionIndex];
-    
-    // Find connected nodes
+
+    // Find connected nodes and reset their pins
     BaseNode* inputNode = findNodeById(conn.inputNode);
     BaseNode* outputNode = findNodeById(conn.outputNode);
-    
-    // Clear connected pins
+
     if (inputNode) {
         for (auto& pin : inputNode->inputs) {
             if (pin.id == conn.inputPin) {
@@ -112,24 +110,23 @@ void NodeEditor::deleteConnection(int connectionIndex) {
                 pin.connected = false;
             }
         }
-        inputNode->dirty = true;
     }
-    
+
     if (outputNode) {
         for (auto& pin : outputNode->outputs) {
             if (pin.id == conn.outputPin) {
                 pin.connected = false;
             }
         }
-        outputNode->dirty = true;
     }
-    
-    // Remove connection
+
+    // Remove the connection
     connections.erase(connections.begin() + connectionIndex);
-    
-    // Reprocess graph
+
+    // Reprocess the graph
     processGraph();
 }
+
 
 
 bool NodeEditor::isConnectionValid(const Connection& conn) {

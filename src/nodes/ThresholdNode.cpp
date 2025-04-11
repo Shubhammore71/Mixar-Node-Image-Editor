@@ -47,7 +47,11 @@ void ThresholdNode::process() {
     if(inputs[0].data.empty()) return;
     
     cv::Mat gray;
-    cv::cvtColor(inputs[0].data, gray, cv::COLOR_BGR2GRAY);
+    if (inputs[0].data.channels() == 3) {
+        cv::cvtColor(inputs[0].data, gray, cv::COLOR_BGR2GRAY);
+    } else {
+        gray = inputs[0].data.clone();
+    }
     
     cv::Mat thresholded;
     switch(method) {

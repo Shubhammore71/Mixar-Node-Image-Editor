@@ -15,13 +15,21 @@ int BlendNode::getPinType(int pinId) const {
 }
 
 void BlendNode::process() {
-    if (inputs.size() < 2 || inputs[0].data.empty() || inputs[1].data.empty()) {
-        outputs[0].data.release();
-        return;
+    if (inputs.size() < 2 || inputs[0].data.empty() || inputs[1].data.empty()) return;
+
+    // Convert inputs to 3-channel if grayscale
+    cv::Mat base, blend;
+    if (inputs[0].data.channels() == 1) {
+        cv::cvtColor(inputs[0].data, base, cv::COLOR_GRAY2BGR);
+    } else {
+        base = inputs[0].data.clone();
     }
 
-    cv::Mat base = inputs[0].data.clone();
-    cv::Mat blend = inputs[1].data.clone();
+    if (inputs[1].data.channels() == 1) {
+        cv::cvtColor(inputs[1].data, blend, cv::COLOR_GRAY2BGR);
+    } else {
+        blend = inputs[1].data.clone();
+    }
 
     // Ensure same size
     if (base.size() != blend.size()) {

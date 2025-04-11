@@ -13,8 +13,14 @@ int OutputNode::getPinType(int pinId) const {
 }
 
 void OutputNode::process() {
-    if (inputs.empty() || inputs[0].data.empty()) {
-        return;
+    if (inputs.empty() || inputs[0].data.empty()) return;
+
+    // Ensure 3-channel for display
+    cv::Mat displayImage;
+    if (inputs[0].data.channels() == 1) {
+        cv::cvtColor(inputs[0].data, displayImage, cv::COLOR_GRAY2BGR);
+    } else {
+        displayImage = inputs[0].data.clone();
     }
 
     // Get input image
