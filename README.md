@@ -2,6 +2,8 @@
 
 ## **Node-Based Image Processor**
 
+![Screenshot](screenshot2.png)
+
 An open-source node-based image processing tool designed for creating modular image manipulation workflows. Users can visually connect processing nodes to build complex pipelines with real-time feedback. Built with C++17, OpenCV, and Dear ImGui.
 
 ---
