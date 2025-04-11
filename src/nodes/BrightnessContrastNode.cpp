@@ -17,14 +17,11 @@ void BrightnessContrastNode::process() {
     if (inputs.empty() || inputs[0].data.empty()) {
         return;
     }
-
     // Create a copy of the input image
     cv::Mat output = inputs[0].data.clone();
-    
     // Apply brightness and contrast
     output.convertTo(output, -1, contrast, brightness);
-    
-    // Set output
+
     outputs[0].data = output;
 }
 
