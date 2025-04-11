@@ -1,7 +1,7 @@
 
 # Node-Based Image Processor
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot1.png)
 
 An open-source **node-based image processing editor** built with **C++**, **OpenCV**, and **Dear ImGui**. This project enables users to build complex image processing pipelines using a visual, interactive editor. Designed with real-time feedback, flexibility, and extensibility in mind.
 
@@ -191,7 +191,7 @@ make -j4
 
 ## 📷 Screenshot
 
-![Node-Based Image Processor Screenshot](screenshot.png)
+![Node-Based Image Processor Screenshot](screenshot2.png)
 
 ---
 
