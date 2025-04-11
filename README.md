@@ -1,6 +1,4 @@
-Here’s a **comprehensive and polished README** for your **Node-Based Image Processor** project. It integrates the structure of your original document with detailed node descriptions (basic, intermediate, and advanced), providing clarity and depth for developers and contributors.
 
----
 
 ```markdown
 # Node-Based Image Processor
@@ -241,13 +239,11 @@ make -j4
 
 **MIT License**
 
-© 2024 [Your Name]
+© 2024 Shubham More
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software...
 
 (standard MIT license text continues)
 ```
 
----
 
-Would you like a **Markdown preview image** of how this README would look, or want help turning this into a GitHub-ready `README.md` file with badges, links, and more branding polish?
