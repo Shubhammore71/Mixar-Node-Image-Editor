@@ -188,43 +188,6 @@ make -j4
 
 ---
 
-## 🤝 Contributing
-
-### 📌 How to Contribute
-
-1. **Report Bugs**  
-   Use GitHub Issues template. Include screenshots or test images.
-
-2. **Suggest Features**  
-   - New node types  
-   - UI improvements  
-   - Performance enhancements  
-
-3. **Code Contributions**
-```bash
-git checkout -b feature/your-feature-name
-cmake -DCMAKE_BUILD_TYPE=Debug ..
-make && ./bin/NodeImageEditor
-```
-
-### 🚩 Priority Contributions
-
-- 🎨 More Image Filters
-- 🚀 GPU Acceleration (OpenCL/CUDA)
-- 🔌 Plugin Support
-- 🧾 Documentation Enhancements
-
----
-
-## 📜 License
-
-MIT License © 2024 [Shubham More](https://github.com/Shubhammore71)
-
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files...
-
-(standard MIT license continues)
-
----
 
 ## 📷 Screenshot
 
@@ -237,6 +200,4 @@ MIT License © 2024 [Shubham More](https://github.com/Shubhammore71)
 **GitHub**: [https://github.com/Shubhammore71/node-based-image-processor](https://github.com/Shubhammore71/node-based-image-processor)
 ```
 
----
 
-Let me know if you want me to generate badges (like license, build, platform), add a logo, or write GitHub issue templates or `CONTRIBUTING.md` as well.
