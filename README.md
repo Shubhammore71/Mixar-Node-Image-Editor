@@ -1,4 +1,4 @@
-# README.md for Node-Based Image Processor
+
 
 ## **Node-Based Image Processor**
 
