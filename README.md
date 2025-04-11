@@ -287,7 +287,5 @@ classDiagram
 5. Export functionality to save processed images.
 
 
-For detailed design documentation, see [DESIGN.md](DESIGN.md).
-
 ---
 
