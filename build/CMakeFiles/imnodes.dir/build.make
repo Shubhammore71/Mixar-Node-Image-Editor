@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /Users/shubhammore/MixarNodeImageEditor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/shubhammore/MixarNodeImageEditor/build
+CMAKE_BINARY_DIR = /Users/shubhammore/mixarnodeimageeditor/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/imnodes.dir/depend.make
@@ -75,7 +75,7 @@ CMakeFiles/imnodes.dir/codegen:
 CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o: CMakeFiles/imnodes.dir/flags.make
 CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o: /Users/shubhammore/MixarNodeImageEditor/imnodes/imnodes.cpp
 CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o: CMakeFiles/imnodes.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o -MF CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o.d -o CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o -c /Users/shubhammore/MixarNodeImageEditor/imnodes/imnodes.cpp
 
 CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.i: cmake_force
@@ -96,7 +96,7 @@ imnodes_EXTERNAL_OBJECTS =
 lib/libimnodes.a: CMakeFiles/imnodes.dir/imnodes/imnodes.cpp.o
 lib/libimnodes.a: CMakeFiles/imnodes.dir/build.make
 lib/libimnodes.a: CMakeFiles/imnodes.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library lib/libimnodes.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library lib/libimnodes.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/imnodes.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/imnodes.dir/link.txt --verbose=$(VERBOSE)
 
@@ -109,6 +109,6 @@ CMakeFiles/imnodes.dir/clean:
 .PHONY : CMakeFiles/imnodes.dir/clean
 
 CMakeFiles/imnodes.dir/depend:
-	cd /Users/shubhammore/MixarNodeImageEditor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/shubhammore/MixarNodeImageEditor /Users/shubhammore/MixarNodeImageEditor /Users/shubhammore/MixarNodeImageEditor/build /Users/shubhammore/MixarNodeImageEditor/build /Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles/imnodes.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/shubhammore/mixarnodeimageeditor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/shubhammore/MixarNodeImageEditor /Users/shubhammore/MixarNodeImageEditor /Users/shubhammore/mixarnodeimageeditor/build /Users/shubhammore/mixarnodeimageeditor/build /Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles/imnodes.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/imnodes.dir/depend
 

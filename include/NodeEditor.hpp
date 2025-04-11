@@ -25,9 +25,18 @@ public:
     NodeEditor();
     ~NodeEditor();
 
+    struct Connection {
+        int inputNode;
+        int outputNode;
+        int inputPin;
+        int outputPin;
+    };
+
+
     
 
     void draw();
+    bool isConnectionValid(const Connection& conn);
     void deleteConnection(int linkId);
     void drawProperties();
     BaseNode* findNodeById(int nodeId);
@@ -41,17 +50,13 @@ public:
     void addNode();
 
 private:
-    struct Connection {
-        int inputNode;
-        int outputNode;
-        int inputPin;
-        int outputPin;
-    };
+
 
     std::vector<std::unique_ptr<BaseNode>> nodes;
     std::vector<Connection> connections;
     int currentId = 0;
     BaseNode* selectedNode = nullptr;
+
     
     void handleConnections();
     void handleDeletion();

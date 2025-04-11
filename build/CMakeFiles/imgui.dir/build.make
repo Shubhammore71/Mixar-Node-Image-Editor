@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /Users/shubhammore/MixarNodeImageEditor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/shubhammore/MixarNodeImageEditor/build
+CMAKE_BINARY_DIR = /Users/shubhammore/mixarnodeimageeditor/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/imgui.dir/depend.make
@@ -75,7 +75,7 @@ CMakeFiles/imgui.dir/codegen:
 CMakeFiles/imgui.dir/imgui/imgui.cpp.o: CMakeFiles/imgui.dir/flags.make
 CMakeFiles/imgui.dir/imgui/imgui.cpp.o: /Users/shubhammore/MixarNodeImageEditor/imgui/imgui.cpp
 CMakeFiles/imgui.dir/imgui/imgui.cpp.o: CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/imgui.dir/imgui/imgui.cpp.o -MF CMakeFiles/imgui.dir/imgui/imgui.cpp.o.d -o CMakeFiles/imgui.dir/imgui/imgui.cpp.o -c /Users/shubhammore/MixarNodeImageEditor/imgui/imgui.cpp
 
 CMakeFiles/imgui.dir/imgui/imgui.cpp.i: cmake_force
@@ -89,7 +89,7 @@ CMakeFiles/imgui.dir/imgui/imgui.cpp.s: cmake_force
 CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o: CMakeFiles/imgui.dir/flags.make
 CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o: /Users/shubhammore/MixarNodeImageEditor/imgui/imgui_demo.cpp
 CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o: CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o -MF CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o.d -o CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.o -c /Users/shubhammore/MixarNodeImageEditor/imgui/imgui_demo.cpp
 
 CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.i: cmake_force
@@ -103,7 +103,7 @@ CMakeFiles/imgui.dir/imgui/imgui_demo.cpp.s: cmake_force
 CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o: CMakeFiles/imgui.dir/flags.make
 CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o: /Users/shubhammore/MixarNodeImageEditor/imgui/imgui_draw.cpp
 CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o: CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o -MF CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o.d -o CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.o -c /Users/shubhammore/MixarNodeImageEditor/imgui/imgui_draw.cpp
 
 CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.i: cmake_force
@@ -117,7 +117,7 @@ CMakeFiles/imgui.dir/imgui/imgui_draw.cpp.s: cmake_force
 CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o: CMakeFiles/imgui.dir/flags.make
 CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o: /Users/shubhammore/MixarNodeImageEditor/imgui/imgui_tables.cpp
 CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o: CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o -MF CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o.d -o CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.o -c /Users/shubhammore/MixarNodeImageEditor/imgui/imgui_tables.cpp
 
 CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.i: cmake_force
@@ -131,7 +131,7 @@ CMakeFiles/imgui.dir/imgui/imgui_tables.cpp.s: cmake_force
 CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o: CMakeFiles/imgui.dir/flags.make
 CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o: /Users/shubhammore/MixarNodeImageEditor/imgui/imgui_widgets.cpp
 CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o: CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o -MF CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.o -c /Users/shubhammore/MixarNodeImageEditor/imgui/imgui_widgets.cpp
 
 CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.i: cmake_force
@@ -145,7 +145,7 @@ CMakeFiles/imgui.dir/imgui/imgui_widgets.cpp.s: cmake_force
 CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/imgui.dir/flags.make
 CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o: /Users/shubhammore/MixarNodeImageEditor/imgui/backends/imgui_impl_glfw.cpp
 CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o -MF CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o.d -o CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o -c /Users/shubhammore/MixarNodeImageEditor/imgui/backends/imgui_impl_glfw.cpp
 
 CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.i: cmake_force
@@ -159,7 +159,7 @@ CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.s: cmake_force
 CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/imgui.dir/flags.make
 CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o: /Users/shubhammore/MixarNodeImageEditor/imgui/backends/imgui_impl_opengl3.cpp
 CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/imgui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o -MF CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o -c /Users/shubhammore/MixarNodeImageEditor/imgui/backends/imgui_impl_opengl3.cpp
 
 CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.i: cmake_force
@@ -192,7 +192,7 @@ lib/libimgui.a: CMakeFiles/imgui.dir/imgui/backends/imgui_impl_glfw.cpp.o
 lib/libimgui.a: CMakeFiles/imgui.dir/imgui/backends/imgui_impl_opengl3.cpp.o
 lib/libimgui.a: CMakeFiles/imgui.dir/build.make
 lib/libimgui.a: CMakeFiles/imgui.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX static library lib/libimgui.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX static library lib/libimgui.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/imgui.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/imgui.dir/link.txt --verbose=$(VERBOSE)
 
@@ -205,6 +205,6 @@ CMakeFiles/imgui.dir/clean:
 .PHONY : CMakeFiles/imgui.dir/clean
 
 CMakeFiles/imgui.dir/depend:
-	cd /Users/shubhammore/MixarNodeImageEditor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/shubhammore/MixarNodeImageEditor /Users/shubhammore/MixarNodeImageEditor /Users/shubhammore/MixarNodeImageEditor/build /Users/shubhammore/MixarNodeImageEditor/build /Users/shubhammore/MixarNodeImageEditor/build/CMakeFiles/imgui.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/shubhammore/mixarnodeimageeditor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/shubhammore/MixarNodeImageEditor /Users/shubhammore/MixarNodeImageEditor /Users/shubhammore/mixarnodeimageeditor/build /Users/shubhammore/mixarnodeimageeditor/build /Users/shubhammore/mixarnodeimageeditor/build/CMakeFiles/imgui.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/imgui.dir/depend
 

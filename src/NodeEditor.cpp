@@ -24,9 +24,7 @@ NodeEditor::~NodeEditor() {
 void NodeEditor::draw() {
     ImNodes::BeginNodeEditor();
 
-
-   
-
+    // Draw all nodes
     for (auto& node : nodes) {
         ImNodes::BeginNode(node->id);
 
@@ -34,14 +32,14 @@ void NodeEditor::draw() {
         ImGui::TextUnformatted(node->name.c_str());
         ImNodes::EndNodeTitleBar();
 
-        // Render input pins
+        // Input pins
         for (auto& input : node->inputs) {
             ImNodes::BeginInputAttribute(input.id);
             ImGui::TextUnformatted(input.name.c_str());
             ImNodes::EndInputAttribute();
         }
 
-        // Render output pins
+        // Output pins
         for (auto& output : node->outputs) {
             ImNodes::BeginOutputAttribute(output.id);
             ImGui::TextUnformatted(output.name.c_str());
@@ -52,70 +50,101 @@ void NodeEditor::draw() {
         ImNodes::EndNode();
     }
 
-   for (const auto& connection : connections) {
-    // Use a consistent formula for link IDs
-    int linkId = connection.inputNode + connection.outputNode;
+for (size_t i = 0; i < connections.size(); i++) {
+        ImNodes::Link(
+            static_cast<int>(i),  // Use index as link ID
+            connections[i].outputPin,
+            connections[i].inputPin
+        );
+    }
     
-    ImNodes::Link(
-        linkId,
-        connection.outputPin,
-        connection.inputPin
-    );
-}
-
     ImNodes::EndNodeEditor();
-     // Check for double-click on links
-    int hoveredLinkId = -1;
-    if (ImNodes::IsLinkHovered(&hoveredLinkId)) {
-        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
-            // Delete the connection with this ID
+
+
+  int hoveredLinkId = -1;
+if (ImNodes::IsLinkHovered(&hoveredLinkId)) {
+    if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+        std::cout << "Double-clicked on link ID: " << hoveredLinkId << std::endl;
+        if (hoveredLinkId >= 0 && hoveredLinkId < static_cast<int>(connections.size())) {
             deleteConnection(hoveredLinkId);
+        }
+    }
+}
+ if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left)) {
+        for (size_t i = 0; i < nodes.size(); i++) {
+            if (ImNodes::IsNodeHovered(&nodes[i]->id)) {
+                // Remove all connections to/from this node
+                connections.erase(
+                    std::remove_if(connections.begin(), connections.end(),
+                        [nodeId = nodes[i]->id](const Connection& conn) {
+                            return conn.inputNode == nodeId || conn.outputNode == nodeId;
+                        }),
+                    connections.end());
+                
+                // Remove the node
+                nodes.erase(nodes.begin() + i);
+                processGraph();
+                break;
+            }
         }
     }
     handleConnections();
 }
-
-void NodeEditor::deleteConnection(int linkId) {
-    // Find the connection matching this link ID
-    auto it = std::find_if(connections.begin(), connections.end(), 
-        [linkId](const Connection& conn) {
-            // Use the same ID generation formula as when creating links
-            return (conn.inputNode + conn.outputNode) == linkId;
-        });
-    
-    if (it != connections.end()) {
-        // Mark connected nodes as dirty to trigger reprocessing
-        BaseNode* inputNode = findNodeById(it->inputNode);
-        BaseNode* outputNode = findNodeById(it->outputNode);
-        
-        if (inputNode) inputNode->dirty = true;
-        if (outputNode) outputNode->dirty = true;
-        
-        // Remove the connection
-        connections.erase(it);
+void NodeEditor::deleteConnection(int connectionIndex) {
+    if (connectionIndex < 0 || connectionIndex >= static_cast<int>(connections.size())) {
+        return;
     }
+    
+    std::cout << "Deleting connection at index: " << connectionIndex << std::endl;
+    
+    // Get connection to delete
+    Connection& conn = connections[connectionIndex];
+    
+    // Find connected nodes
+    BaseNode* inputNode = findNodeById(conn.inputNode);
+    BaseNode* outputNode = findNodeById(conn.outputNode);
+    
+    // Clear connected pins
+    if (inputNode) {
+        for (auto& pin : inputNode->inputs) {
+            if (pin.id == conn.inputPin) {
+                pin.data.release(); // Clear data
+                pin.connected = false;
+            }
+        }
+        inputNode->dirty = true;
+    }
+    
+    if (outputNode) {
+        for (auto& pin : outputNode->outputs) {
+            if (pin.id == conn.outputPin) {
+                pin.connected = false;
+            }
+        }
+        outputNode->dirty = true;
+    }
+    
+    // Remove connection
+    connections.erase(connections.begin() + connectionIndex);
+    
+    // Reprocess graph
+    processGraph();
 }
 
 
-
-
+bool NodeEditor::isConnectionValid(const Connection& conn) {
+    return findNodeById(conn.inputNode) && findNodeById(conn.outputNode);
+}
 
 
 void NodeEditor::handleConnections() {
-    // Check for dropped links (when user releases mouse button)
-    int startPin = -1, endPin = -1;
-    
-    // CRITICAL: This needs to be called EVERY FRAME to detect connections
+    int startPin, endPin;
     if (ImNodes::IsLinkCreated(&startPin, &endPin)) {
-        // Debug output
-        std::cout << "Link created between pins: " << startPin << " -> " << endPin << std::endl;
-        
-        // Find the actual nodes these pins belong to
         BaseNode* outputNode = findNodeByPin(startPin, false);
         BaseNode* inputNode = findNodeByPin(endPin, true);
         
         if (outputNode && inputNode) {
-            // Create a new connection
+            // This is where connections should be stored
             connections.push_back({
                 inputNode->id,
                 outputNode->id,
@@ -123,14 +152,16 @@ void NodeEditor::handleConnections() {
                 startPin
             });
             
-            // Mark nodes as dirty to trigger reprocessing
+            std::cout << "Connection created: " << connections.size() << " total connections" << std::endl;
+            
+            // Mark for processing
             outputNode->dirty = true;
             inputNode->dirty = true;
-            
-            std::cout << "Connection successfully created!" << std::endl;
         }
     }
 }
+
+
 
 BaseNode* NodeEditor::findNodeById(int nodeId) {
     for (auto& node : nodes) {
@@ -174,12 +205,19 @@ BaseNode* NodeEditor::findNodeByPin(int pinId, bool isInput) {
 
 
 void NodeEditor::processGraph() {
+    connections.erase(std::remove_if(connections.begin(), connections.end(),
+        [this](const Connection& conn) {
+            return !this->isConnectionValid(conn);
+        }), connections.end());
+    
     std::unordered_set<BaseNode*> processed;
 
     for (auto& node : nodes) {
         processNode(node.get(), processed);
     }
 }
+
+
 void NodeEditor::processNode(BaseNode* node, std::unordered_set<BaseNode*>& processed) {
     if (processed.count(node) > 0) {
         return; // Skip if already processed
@@ -254,17 +292,32 @@ BaseNode* NodeEditor::createNode(NodeType type) {
 
 
 void NodeEditor::drawProperties() {
-    // Existing properties rendering logic
-    ImGui::Text("Node Properties");
+    if (selectedNode) {
+        selectedNode->drawUI();
+    } else {
+        // Add your debug code here - this is likely the current location
+        ImGui::Begin("Debug");
+        ImGui::Text("Connections: %zu", connections.size());
 
-    // Debugging connection info
-    ImGui::Begin("Debug");
-    ImGui::Text("Connections: %zu", connections.size());
-    for (const auto& conn : connections) {
-        ImGui::Text("Link %d -> %d", conn.outputPin, conn.inputPin);
+        // Show all connections
+        for (size_t i = 0; i < connections.size(); i++) {
+            ImGui::Text("Link %zu: %d:%d → %d:%d", 
+                        i, 
+                        connections[i].outputNode, connections[i].outputPin,
+                        connections[i].inputNode, connections[i].inputPin);
+        }
+
+        // Show event states
+        ImGui::Text("Double-clicked: %s", ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) ? "Yes" : "No");
+
+        int hoveredLink = -1;
+        bool isHovered = ImNodes::IsLinkHovered(&hoveredLink);
+        ImGui::Text("Link hovered: %d (Hovered: %s)", hoveredLink, isHovered ? "Yes" : "No");
+
+        ImGui::End();
     }
-    ImGui::End();
 }
+
 
 
 void NodeEditor::clear() {
