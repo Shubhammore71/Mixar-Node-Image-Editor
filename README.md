@@ -141,32 +141,127 @@ make -j$(nproc)
 ```mermaid
 classDiagram
     class NodeEditor {
-        -vector> nodes
-        -vector connections
+        -vector<unique_ptr<BaseNode>> nodes
+        -vector<Connection> connections
+        -int currentId
+        -BaseNode* selectedNode
         +processGraph()
         +addNode()
-        +deleteConnection()
+        +deleteConnection(int)
+        +handleConnections()
+        +draw()
+        +drawProperties()
+        +clear()
+        +findNodeById(int)
+        +findPinIndex()
+        +findNodeByPin()
     }
 
     class BaseNode {
-        >
-        +process()
-        +drawUI()
-        +inputs : vector
-        +outputs : vector
+        <<abstract>>
+        -vector<Pin> inputs
+        -vector<Pin> outputs
+        -string name
+        -int id
+        -bool dirty
+        +process() virtual
+        +drawUI() virtual
+        +getPinType() virtual
     }
 
     class ImageInputNode {
-        +filePath : string
+        +process() override
+        +drawUI() override
+        +getPinType() override
     }
 
     class OutputNode {
-        +saveImage(filePath : string)
+        +process() override
+        +drawUI() override
+        +getPinType() override
     }
 
-    NodeEditor o-- BaseNode : manages*
-    BaseNode <|-- ImageInputNode : inherits*
-    BaseNode <|-- OutputNode : inherits*
+    class BrightnessContrastNode {
+        +process() override
+        +drawUI() override
+        +getPinType() override
+    }
+
+    class ColorChannelSplitterNode {
+        +process() override
+        +drawUI() override
+        +getPinType() override
+    }
+
+    class BlurNode {
+        +process() override
+        +drawUI() override
+        +getPinType() override
+    }
+
+    class ThresholdNode {
+        +process() override
+        +drawUI() override
+        +getPinType() override
+    }
+
+    class EdgeDetectionNode {
+        +process() override
+        +drawUI() override
+        +getPinType() override
+    }
+
+    class BlendNode {
+        +process() override
+        +drawUI() override
+        +getPinType() override
+    }
+
+    class NoiseNode {
+        +process() override
+        +drawUI() override
+        +getPinType() override
+    }
+
+    class ConvolutionNode {
+        +process() override
+        +drawUI() override
+        +getPinType() override
+    }
+
+    class Connection {
+        -int inputNode
+        -int outputNode
+        -int inputPin
+        -int outputPin
+    }
+
+    class Pin {
+        -int id
+        -string name
+        -cv::Mat data
+        -bool connected
+        -PinType type
+        +isCompatibleWith(PinType)
+    }
+
+    NodeEditor "1" o-- "*" BaseNode : manages
+    NodeEditor "1" o-- "*" Connection : tracks
+    BaseNode "1" o-- "*" Pin : has
+    Connection "1" -- "2" Pin : connects
+    
+    BaseNode <|-- ImageInputNode
+    BaseNode <|-- OutputNode
+    BaseNode <|-- BrightnessContrastNode
+    BaseNode <|-- ColorChannelSplitterNode
+    BaseNode <|-- BlurNode
+    BaseNode <|-- ThresholdNode 
+    BaseNode <|-- EdgeDetectionNode
+    BaseNode <|-- BlendNode
+    BaseNode <|-- NoiseNode
+    BaseNode <|-- ConvolutionNode
+
+ 
 ```
 
 ---
