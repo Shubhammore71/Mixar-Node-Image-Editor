@@ -1,7 +1,8 @@
 // ImageInputNode.cpp
-// src/nodes/ImageInputNode.cpp
-#include <imgui.h>
-#include "portable-file-dialogs.h"
+// This file implements the ImageInputNode class, which is responsible for loading image files into the node graph.
+// It inherits from BaseNode and provides functionality to load images using OpenCV.
+#include <imgui.h>  // Include Dear ImGui for UI rendering
+#include "portable-file-dialogs.h" // Include cross-platform file dialog library
 
 #include "ImageInputNode.hpp"
 #include <opencv2/imgcodecs.hpp>
@@ -12,7 +13,6 @@ ImageInputNode::ImageInputNode() {
 }
 
 int ImageInputNode::getPinType(int pinId) const {
-    // Return 0 for image type, 1 for numeric, etc.
     return 0; // Assuming all pins are image type
 }
 
