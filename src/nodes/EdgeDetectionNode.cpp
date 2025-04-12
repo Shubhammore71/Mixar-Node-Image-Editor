@@ -3,6 +3,17 @@
 #include <imgui.h>
 #include <opencv2/opencv.hpp>
 
+// Implementation of the EdgeDetectionNode class which provides various edge detection
+// algorithms (Sobel, Canny, Laplacian) using OpenCV's image processing functions
+
+
+/**
+ * Constructor for EdgeDetectionNode
+ * 
+ * Initializes a node that applies edge detection algorithms to images.
+ * Creates input/output pins and sets default parameter values for the
+ * various edge detection methods.
+ */
 EdgeDetectionNode::EdgeDetectionNode() {
     name = "Edge Detection";
     inputs.emplace_back(Pin{0, "Image"});
@@ -15,6 +26,12 @@ EdgeDetectionNode::EdgeDetectionNode() {
     kernelSize = 3;  // Set a valid default (1, 3, 5, or 7)
     overlay = false;
 }
+
+/**
+ *  Returns the data type for a specific pin
+ *  The ID of the pin to check
+ * Integer representing the pin type (0 = image type)
+ */
 
 int EdgeDetectionNode::getPinType(int pinId) const {
     return 0; // All pins are image type
@@ -161,7 +178,6 @@ void EdgeDetectionNode::drawUI() {
             kernelSize = 1 + kernelIndex * 2; // Generates 1, 3, 5, 7, 9, 11
         }
     }
-    
-    // Overlay option
+     // Overlay checkbox - toggle between showing just edges or edges on original image
     ImGui::Checkbox("Overlay on Original", &overlay);
 }
