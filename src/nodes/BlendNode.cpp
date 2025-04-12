@@ -1,6 +1,21 @@
+
+// Implements various image blending operations to combine two input images
+// using different mathematical algorithms for visual composition effects
+
 #include "BlendNode.hpp"
 #include <imgui.h>
 #include <opencv2/opencv.hpp>
+
+
+
+
+/**
+ * Constructor for BlendNode
+ * 
+ * Initializes a node that combines two images using various blending algorithms.
+ * Sets up input pins for base and blend images, and an output pin for the result.
+ * Default blend mode is "Normal" with 100% opacity.
+ */
 
 BlendNode::BlendNode() {
     name = "Blend";
@@ -47,6 +62,21 @@ void BlendNode::process() {
     resultFloat.convertTo(outputs[0].data, CV_8UC3, 255.0);
 }
 
+/**
+ * Applies a specific blend algorithm to two floating-point images
+ * 
+ * Implements various blend modes commonly found in image editing software:
+ * - Normal: Simple alpha blending with opacity control
+ * - Multiply: Darkens images by multiplying pixel values
+ * - Screen: Lightens images (inverse of multiply)
+ * - Overlay: Combines multiply and screen based on base image brightness
+ * - Difference: Shows the absolute difference between images
+ * 
+ * The bottom/background image (normalized 0.0-1.0)
+ * The top/foreground image (normalized 0.0-1.0)
+ * The blended result as a floating-point image (normalized 0.0-1.0)
+ */
+
 cv::Mat BlendNode::blendImages(const cv::Mat& base, const cv::Mat& blend) {
     cv::Mat result(base.size(), CV_32FC3);
     
@@ -91,6 +121,9 @@ cv::Mat BlendNode::blendImages(const cv::Mat& base, const cv::Mat& blend) {
 void BlendNode::drawUI() {
     const char* modes[] = {"Normal", "Multiply", "Screen", "Overlay", "Difference"};
     ImGui::Combo("Blend Mode", &blendMode, modes, IM_ARRAYSIZE(modes));
+
+     // Only show opacity slider for Normal blend mode since other modes
+    // have their own fixed mathematical relationships
     
     if (blendMode == 0) { // Only show opacity for Normal mode
         ImGui::SliderFloat("Opacity", &opacity, 0.0f, 1.0f);
