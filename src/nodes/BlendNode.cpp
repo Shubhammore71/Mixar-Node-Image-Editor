@@ -90,7 +90,9 @@ cv::Mat BlendNode::blendImages(const cv::Mat& base, const cv::Mat& blend) {
                     (cv::Scalar::all(1.0) - base).mul(cv::Scalar::all(1.0) - blend);
             break;
             
-        case 3: // Overlay
+        case 3: // Overlay blend mode
+            // Combines multiply and screen modes
+            // Dark areas in base: multiply, Light areas in base: screen
             for (int y = 0; y < base.rows; y++) {
                 for (int x = 0; x < base.cols; x++) {
                     const cv::Vec3f& b = base.at<cv::Vec3f>(y, x);
@@ -106,11 +108,15 @@ cv::Mat BlendNode::blendImages(const cv::Mat& base, const cv::Mat& blend) {
             }
             break;
             
-        case 4: // Difference
+        case 4: // Difference blend mode
+            // Absolute difference between pixel values
+            // Shows where images differ, black where identical
             cv::absdiff(base, blend, result);
             break;
             
-        default: // Normal
+        default:// Normal blend mode
+            // Simple alpha blending with opacity control
+            // Linear interpolation between base and blend images
             cv::addWeighted(base, opacity, blend, 1.0f - opacity, 0.0f, result);
             break;
     }
