@@ -1,19 +1,21 @@
-// include/nodes/OutputNode.hpp
 #pragma once
 #include "BaseNode.hpp"
+#include <string>
 #include <GL/glew.h>
 
 class OutputNode : public BaseNode {
 public:
- int getPinType(int pinId) const override; 
     OutputNode();
+    ~OutputNode() override;
     void process() override;
     void drawUI() override;
-    
-private:
+    int getPinType(int pinId) const override;
+    void saveImage(const std::string& path);
 
-    std::string outputPath;
-    int format = 0;
+private:
+    GLuint textureID = 0;
+    std::string filepath;
+    int format = 0;       // 0: PNG, 1: JPEG, 2: BMP
     int quality = 95;
-    GLuint textureID = 0; // Add texture handle
+    int compression = 3;  // Compression level for PNG
 };

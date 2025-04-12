@@ -1,84 +1,123 @@
-// src/nodes/OutputNode.cpp
 #include "nodes/OutputNode.hpp"
-#include <opencv2/opencv.hpp>
 #include <imgui.h>
+#include "portable-file-dialogs.h"
+#include <opencv2/imgcodecs.hpp>
+#include <filesystem>
+
 
 OutputNode::OutputNode() {
     name = "Output";
     inputs.emplace_back(Pin{0, "Image"});
+    glGenTextures(1, &textureID);
 }
-int OutputNode::getPinType(int pinId) const {
-    return 0;
+
+OutputNode::~OutputNode() {
+    if (textureID != 0) {
+        glDeleteTextures(1, &textureID);
+    }
 }
 
 void OutputNode::process() {
     if (inputs.empty() || inputs[0].data.empty()) return;
 
-    // Ensure 3-channel for display
-    cv::Mat displayImage;
+    cv::Mat processedImage;
     if (inputs[0].data.channels() == 1) {
-        cv::cvtColor(inputs[0].data, displayImage, cv::COLOR_GRAY2BGR);
+        cv::cvtColor(inputs[0].data, processedImage, cv::COLOR_GRAY2BGR);
     } else {
-        displayImage = inputs[0].data.clone();
+        processedImage = inputs[0].data.clone();
     }
 
-    // Get input image
-    cv::Mat inputImage = inputs[0].data;
-    
-    // Create OpenGL texture if needed
-    if (textureID == 0) {
-        glGenTextures(1, &textureID);
-    }
-    
-    // Explicitly flip the image vertically
-    cv::Mat flippedImage;
-    cv::flip(inputImage, flippedImage, 0);  // 0 = flip around x-axis
-    
-    // Convert BGR to RGB format for OpenGL
-    cv::Mat rgbImage;
-    cv::cvtColor(flippedImage, rgbImage, cv::COLOR_BGR2RGB);
-    
-    // Bind texture and set parameters
+    cv::flip(processedImage, processedImage, 0);
+
     glBindTexture(GL_TEXTURE_2D, textureID);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    
-    // Upload texture data
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 
-                 rgbImage.cols, rgbImage.rows, 0,
-                 GL_RGB, GL_UNSIGNED_BYTE, rgbImage.data);
+                processedImage.cols, processedImage.rows, 0,
+                GL_BGR, GL_UNSIGNED_BYTE, processedImage.data);
 }
 
-
-
-
-
-
 void OutputNode::drawUI() {
-    // Display debugging info
-    ImGui::Text("Input image: %dx%d", 
-        inputs.empty() || inputs[0].data.empty() ? 0 : inputs[0].data.cols,
-        inputs.empty() || inputs[0].data.empty() ? 0 : inputs[0].data.rows);
-    ImGui::Text("TextureID: %d", textureID);
+    ImGui::Text("Output Settings");
     
-    // Display the image with flipped UV coordinates
-    if (textureID != 0 && !inputs.empty() && !inputs[0].data.empty()) {
-        float width = 300.0f;
-        float aspect = (float)inputs[0].data.rows / inputs[0].data.cols;
-        float height = width * aspect;
-        
-        ImGui::Image(
-            (ImTextureID)(intptr_t)textureID,
-            ImVec2(width, height),
-            ImVec2(0, 1),  // Bottom-left UV (flipped vertically)
-            ImVec2(1, 0)   // Top-right UV (flipped vertically)
-        );
-    } else {
-        ImGui::Text("No image to display");
+    const char* formats[] = {"PNG", "JPEG", "BMP"};
+    ImGui::Combo("Format", &format, formats, IM_ARRAYSIZE(formats));
+
+    if (format == 1) { // JPEG
+        ImGui::SliderInt("Quality", &quality, 1, 100);
+    } else if (format == 0) { // PNG
+        ImGui::SliderInt("Compression", &compression, 0, 9);
+    }
+
+    if (ImGui::Button("Save Image")) {
+        auto file = pfd::save_file("Save image", "",
+            { "Image Files", "*.png *.jpg *.jpeg *.bmp" });
+        if (!file.result().empty()) {
+            saveImage(file.result());
+        }
+    }
+
+    if (!inputs[0].data.empty() && textureID != 0) {
+        float aspect = static_cast<float>(inputs[0].data.rows) / inputs[0].data.cols;
+        ImGui::Image((ImTextureID)(intptr_t)textureID, 
+                    ImVec2(300, 300 * aspect),
+                    ImVec2(0, 1), ImVec2(1, 0));
     }
 }
 
 
 
+void OutputNode::saveImage(const std::string& path) {
+    if (inputs.empty() || inputs[0].data.empty()) {
+        std::cerr << "ERROR: No input image to save!\n";
+        return;
+    }
+
+    // Debug: Print image properties
+    std::cout << "\n--- Saving Image Debug Info ---\n"
+              << "Dimensions: " << inputs[0].data.cols << "x" 
+              << inputs[0].data.rows << "\n"
+              << "Channels: " << inputs[0].data.channels() << "\n"
+              << "Data pointer: " << inputs[0].data.data << "\n";
+
+    // Undo OpenGL's vertical flip
+    cv::Mat saveImage;
+    cv::flip(inputs[0].data, saveImage, 0); // 0 = vertical flip
+
+    // Add file extension if missing
+    std::string fullPath = path;
+    const char* extensions[] = {".png", ".jpg", ".bmp"};
+    if (fullPath.find('.') == std::string::npos) {
+        fullPath += extensions[format];
+    }
+
+    // Create parent directories
+    std::filesystem::create_directories(
+        std::filesystem::path(fullPath).parent_path()
+    );
+
+    // Set OpenCV write parameters
+    std::vector<int> params;
+    switch(format) {
+        case 0: params = {cv::IMWRITE_PNG_COMPRESSION, compression}; break;
+        case 1: params = {cv::IMWRITE_JPEG_QUALITY, quality}; break;
+        default: break;
+    }
+
+    // Attempt to save
+    bool success = cv::imwrite(fullPath, saveImage, params);
+    
+    std::cout << "Save " << (success ? "SUCCEEDED" : "FAILED") 
+              << " at: " << fullPath << "\n";
+
+    if (!success) {
+        std::cerr << "Possible reasons:\n"
+                  << "1. Invalid path/permissions\n"
+                  << "2. Unsupported format\n"
+                  << "3. Corrupted image data\n";
+    }
+}
+
+
+int OutputNode::getPinType(int pinId) const {
+    return 0; // All pins are image type
+}
