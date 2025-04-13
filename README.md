@@ -9,7 +9,7 @@ An open-source node-based image processing tool designed for creating modular im
 ---
 ## **Technical Documentation**
 
-![Node-Based Image Processor Architecture](https://drive.google.com/uc?id=1Z3lw-BvAAmsejjg7oj_IY1Hml9oiGCgX)
+![Node-Based Image Processor Architecture](https://drive.google.com/file/d/1Z3lw-BvAAmsejjg7oj_IY1Hml9oiGCgX/view?usp=sharing)
 
 The above document illustrates the architecture of the Node-Based Image Processor, showcasing the relationships between core components such as `NodeEditor`, `BaseNode`, and derived nodes like `ImageInputNode`, `BlurNode`, and `OutputNode`.
 
