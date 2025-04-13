@@ -27,10 +27,10 @@ The Node-Based Image Processor allows users to:
 | **Input/Output**        | Image Loading, Image Saving      |  
 | **Color Adjustments**   | Brightness/Contrast              |  
 | **Filters**             | Gaussian Blur, Median Blur       |  
-| **Edge Detection**      | Sobel, Laplacian                 |  
+| **Edge Detection**      | Sobel,Canny, Laplacian           |  
 | **Thresholding**        | Binary, Adaptive                 |  
 | **Advanced Operations** | Channel Splitting, Noise Generation |  
-| **Blend Modes**         | Overlay, Multiply, Screen        |  
+| **Blend Modes**         | Overlay, Multiply, Screen, Difference       |  
 
 ### **Technical Capabilities**
 - Dynamic node graph creation/deletion  
